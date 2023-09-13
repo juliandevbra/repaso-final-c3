@@ -4,10 +4,10 @@ import { useCharStates } from "../Context/Context"
 
 const Home = () => {
 
-    const {chars} = useCharStates()
+    const {state} = useCharStates()
   return (
     <div>
-        {chars.map(char => (<Card char={char} key={char.id}/>))}
+        {state.chars.map(char => (<Card char={char} key={char.id}/>))}
     </div>
   )
 }
