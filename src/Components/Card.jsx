@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { useCharStates } from '../Context/Context'
 
 const Card = ({char}) => {
@@ -12,8 +13,10 @@ const Card = ({char}) => {
         // dispatch({type: 'DELETE_FAV', payload: deleteFav})
         //  deleteFav es un array nuevo con el elemento filtrado
         dispatch({type: 'DELETE_FAV', payload: findChar})
+        toast('Se ha eliminado de favoritos', {position: 'top-right', theme: 'dark'})
       } else {
         dispatch({type: 'ADD_FAV', payload: char})
+        toast('Se ha agregado a favoritos', {position: 'top-right', theme: 'dark'})
       }
       // 
       

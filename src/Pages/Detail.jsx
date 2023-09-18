@@ -2,6 +2,8 @@ import axios from "axios"
 import { useState } from "react"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
+import { toast } from "react-toastify"
+import Swal from "sweetalert2"
 import { useCharStates } from "../Context/Context"
 
 const Detail = () => {
@@ -11,10 +13,22 @@ const Detail = () => {
     const {name, species, image, status} = state.char
 
     const url = 'https://rickandmortyapi.com/api/character/' + params.id
-
+s
     useEffect(() => {
-        axios(url)
-        .then(res => dispatch({type: 'GET_CHAR', payload: res.data}))
+        const fetchData = async () => {
+            try {
+                const res = await axios(url)
+                dispatch({type: 'GET_CHAR', payload: res.data})
+                toast('Se ha obtenido el personaje')
+            } catch (err) {
+                Swal.fire(
+                    '...Oops',
+                    'Error al traer el personaje',
+                    'error'
+                )
+            }
+        }
+        fetchData()
     }, [])
 
     return (
